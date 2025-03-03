@@ -57,6 +57,7 @@ Command opCodeToCommand(size_t opCode) {
         case 41: return Command::branchNeg;
         case 42: return Command::branchZero;
         case 43: return Command::halt;
+        return Command::halt;
     };
 };
 
