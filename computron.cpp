@@ -62,6 +62,8 @@ Command opCodeToCommand(size_t opCode) {
 
 void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* const icPtr, int* const irPtr, size_t* const opCodePtr, size_t* const opPtr, const std::vector<int>& inputs)
 {
+    int acptrVal = *acPtr;
+    int opptrVal = *opPtr;
     size_t inputIndex{ 0 };
 
     do {
@@ -92,7 +94,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             break;
 
         case Command::add:
-            word = *opPtr + *acPtr;
+            word = opptrVal + acptrVal;
             if (validWord(word)) {
                 *acPtr = word;
             }
