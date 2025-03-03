@@ -86,7 +86,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             break;
 
         case Command::load:
-            *acPtr = memory.at(*opPtr);
+            *acPtr = memory[*opPtr];
             (*icPtr)++;
             break;
 
@@ -104,6 +104,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             else {
                 throw std::runtime_error("invalid_input");
             }
+            break;
 
         case Command::subtract:
             word = *acPtr - memory[*opPtr];
@@ -114,6 +115,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             else {
                 throw std::runtime_error("invalid_input");
             }
+            break;
 
         case Command::multiply:
             word = memory[*opPtr] * *acPtr;
@@ -124,6 +126,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             else {
                 throw std::runtime_error("invalid_input");
             }
+            break;
 
         case Command::divide:
             word = memory[*opPtr] / *acPtr;
@@ -134,6 +137,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             else {
                 throw std::runtime_error("invalid_input");
             }
+            break;
 
         case Command::branch:
             *icPtr = *opPtr;
