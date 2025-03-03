@@ -94,7 +94,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             break;
 
         case Command::add:
-            word = opptrVal + acptrVal;
+            word = memory.at(*opPtr) + *acPtr;
             if (validWord(word)) {
                 *acPtr = word;
             }
@@ -103,9 +103,9 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             }
 
         case Command::subtract:
-            word = *opPtr - *acPtr;
             if (validWord(word)) {
                 *acPtr = word;
+                (*icPtr)++;
             }
             else {
                 throw std::runtime_error("invalid_input");
