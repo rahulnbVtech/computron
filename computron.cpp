@@ -41,8 +41,8 @@ Command opCodeToCommand(size_t opCode) {
     switch (opCode) {
         case 10: return Command::read;
         case 11: return Command::write;
-        case 21: return Command::load;
-        case 22: return Command::store;
+        case 20: return Command::load;
+        case 21: return Command::store;
         case 30: return Command::add;
         case 31: return Command::subtract;
         case 32: return Command::divide;
