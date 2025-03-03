@@ -82,12 +82,12 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             break;
 
         case Command::load:
-            *acPtr = memory.at(*opPtr);
+            memory[*opPtr] = *acPtr;
             (*icPtr)++;
             break;
 
         case Command::store:
-            memory.at(*opPtr) = *acPtr;
+            *acPtr = memory[*opPtr];
             (*icPtr)++;
             break;
 
