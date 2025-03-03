@@ -16,4 +16,6 @@ int main() {
 
     dump(memory, accumulator, instructionCounter, instructionRegister, 
          operationCode, operand);
+
+    return 0;
 }

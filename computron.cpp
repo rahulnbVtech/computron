@@ -3,12 +3,6 @@
 #include <fstream>
 #include <iomanip>
 
-int accumulator{ 0 };
-size_t instructionCounter{ 0 };
-int instructionRegister{ 0 };
-size_t operationCode{ 0 };
-size_t operand{ 0 };
-
 void load_from_file(std::array<int, memorySize>& memory, const std::string& filename)
 {
 	constexpr int sentinel{ -99999 };// terminates reading after -99999
