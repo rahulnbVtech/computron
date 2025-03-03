@@ -61,9 +61,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
 
     do {
         //instruction counter to register
-//instructionRegister = memory [instructionCounter];
-//operationCode = instructionRegister / 100; // divide
-//operand = instructionRegister % 100; // remainder
+
 
         *irPtr = memory[*icPtr];
         *opCodePtr = *irPtr / 100;
@@ -81,8 +79,6 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
 
         case Command::write:
             (*icPtr)++;
-            //std::cout << "Contents of " << std::setfill('0') << std::setw(2) 
-                     // << *opPtr << " : " << memory[*opPtr] << "\n"; 
             break;
 
         case Command::load:
@@ -91,7 +87,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             break;
 
         case Command::store:
-            memory[*opPtr] = *acPtr;
+            memory.at(*opPtr) = *acPtr;
             (*icPtr)++;
             break;
 
@@ -132,7 +128,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             if (memory[*opPtr] == 0) {
                 throw std::runtime_error("invalid_input");
             }
-            word = (int)*acPtr / memory[*opPtr];
+            word = (int)(*acPtr / memory[*opPtr]);
             if (validWord(word)) {
                 *acPtr = word;
                 (*icPtr)++;
