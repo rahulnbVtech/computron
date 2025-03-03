@@ -62,8 +62,6 @@ Command opCodeToCommand(size_t opCode) {
 
 void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* const icPtr, int* const irPtr, size_t* const opCodePtr, size_t* const opPtr, const std::vector<int>& inputs)
 {
-    int acptrVal = *acPtr;
-    int opptrVal = *opPtr;
     size_t inputIndex{ 0 };
 
     do {
@@ -72,29 +70,29 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
         switch (opCodeToCommand(*opCodePtr)) {
         case Command::read:
             word = inputs[inputIndex];
-            *opPtr = word;
+            memory[*opPtr] = word;
             (*icPtr)++;
             inputIndex++;
             break;
 
         case Command::write:
             (*icPtr)++;
-            std::cout << "Contents of " << std::setfill('0') << std::setw(2) 
-                      << *opPtr << " : " << memory[*opPtr] << "\n"; 
+            //std::cout << "Contents of " << std::setfill('0') << std::setw(2) 
+                     // << *opPtr << " : " << memory[*opPtr] << "\n"; 
             break;
 
         case Command::load:
-            *acPtr = *opPtr;
+            *acPtr = memory[*opPtr];
             (*icPtr)++;
             break;
 
         case Command::store:
-            *opPtr = *acPtr;
+            memory[*opPtr] = *acPtr;
             (*icPtr)++;
             break;
 
         case Command::add:
-            word = memory.at(*opPtr) + *acPtr;
+            word = memory[*opPtr] + *acPtr;
             if (validWord(word)) {
                 *acPtr = word;
             }
@@ -103,6 +101,7 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             }
 
         case Command::subtract:
+            word = *acPtr - memory[*opPtr];
             if (validWord(word)) {
                 *acPtr = word;
                 (*icPtr)++;
@@ -112,18 +111,20 @@ void execute(std::array<int, memorySize>& memory, int* const acPtr, size_t* cons
             }
 
         case Command::multiply:
-            word = *opPtr * *acPtr;
+            word = memory[*opPtr] * *acPtr;
             if (validWord(word)) {
                 *acPtr = word;
+                (*icPtr)++;
             }
             else {
                 throw std::runtime_error("invalid_input");
             }
 
         case Command::divide:
-            word = *opPtr / *acPtr;
+            word = memory[*opPtr] / *acPtr;
             if (validWord(word)) {
                 *acPtr = word;
+                (*icPtr)++;
             }
             else {
                 throw std::runtime_error("invalid_input");
