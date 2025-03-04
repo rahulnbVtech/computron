@@ -9,13 +9,13 @@ int main() {
     size_t operand{ 0 };
     const std::vector<int> inputs{ 4,5 };
 
-    load_from_file(memory, "p1.txt");
+    load_from_file(memory, "p1.txt"); // loading the text file
 
     execute(memory, &accumulator, &instructionCounter, &instructionRegister,
-        &operationCode, &operand, inputs);
+        &operationCode, &operand, inputs); // executing the instructions from the test files
 
     dump(memory, accumulator, instructionCounter, instructionRegister, 
-         operationCode, operand);
+         operationCode, operand); // printing out the memory dump
 
     return 0;
 }
